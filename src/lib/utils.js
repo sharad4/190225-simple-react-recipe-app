@@ -13,8 +13,8 @@ const COLORS = {
     },
 };
 
-export const getBadgeColor = () => {
-    const colorNames = Objects.keys(COLORS);
+export const getRandomColor = () => {
+    const colorNames = Object.keys(COLORS);
     const randomIndex = Math.floor(Math.random() * colorNames.length);
     const randomColorName = colorNames[randomIndex];
     return COLORS[randomColorName];

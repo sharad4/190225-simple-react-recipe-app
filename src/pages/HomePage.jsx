@@ -5,6 +5,7 @@ import { getRandomColor } from "../lib/utils";
 
 const APP_ID = import.meta.env.VITE_APP_ID;
 const APP_KEY = import.meta.env.VITE_APP_KEY;
+const APP_USERID = import.meta.env.VITE_APP_USERID;
 
 const HomePage = () => {
 	const [recipes, setRecipes] = useState([]);
@@ -15,7 +16,13 @@ const HomePage = () => {
 		setRecipes([]);
 		try {
 			const res = await fetch(
-				`https://api.edamam.com/api/recipes/v2/?app_id=${APP_ID}&app_key=${APP_KEY}&q=${searchQuery}&type=public`
+				`https://api.edamam.com/api/recipes/v2?type=public&q=${searchQuery}&app_id=${APP_ID}&app_key=${APP_KEY}`,
+				{
+					method: "GET",
+					headers: {
+						"Edamam-Account-User": APP_USERID,
+					},
+				}
 			);
 			const data = await res.json();
 			setRecipes(data.hits);
